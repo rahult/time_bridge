@@ -8,38 +8,35 @@
       %table(width="100%" border="0" cellspacing="0" cellpadding="0")
         %tbody
           %tr(class="table-header")
-            %th(width="20%")
+            %th(width="30%")
               %h5 Name
             %th(width="10%")
-              %h5 Story type
+              %h5 Type
             %th(width="10%")
               %h5 Estimate
             %th(width="10%")
-              %h5 Current state
-            %th(width="10%")
+              %h5 State
+            %th(width="15%")
               %h5 Requested by
             %th(width="15%")
               %h5 Owned by
-            %th(width="15%")
-              %h5 User
             %th(width="10%")
               %h5 Actions
 
           - stories.each do |story|
             %tr
               %td= story.name
-              %td= story.story_type
+              %td= story.story_type.capitalize
               %td= story.estimate
-              %td= story.current_state
+              %td= story.current_state.capitalize
               %td= story.requested_by
-              %td= story.owned_by
-              %td= story.user_id
-              %td= link_to('Start', log_project_story_path(:project_id => story.project_id, :id => story.id))
+              %td= story.user.blank? ? "" : story.user
+              %td= link_to(image_tag("start.png"), log_project_story_path(:project_id => story.project_id, :id => story.id))
             - story.time_logs.each do |log|
               %tr
                 %td(colspan="2")= log.start_time.to_s(:pretty)
                 %td(colspan="2")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
                 %td(colspan="2")= log.notes
-                %td(colspan="3")= log.end_time.blank? ? link_to("Stop", stop_project_story_path(:project_id => story.project_id, :id => story.id)) : "Completed"
+                %td(colspan="3")= log.end_time.blank? ? link_to(image_tag("stop.png"), stop_project_story_path(:project_id => story.project_id, :id => story.id)) : image_tag("tick.png")
 
 %br

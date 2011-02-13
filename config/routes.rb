@@ -1,5 +1,7 @@
 TimeBridge::Application.routes.draw do
-  resources :time_logs
+  resources :settings do
+    get 'sync', :on => :member
+  end
 
   resources :projects do
     resources :stories do
@@ -9,6 +11,7 @@ TimeBridge::Application.routes.draw do
   end
 
   match 'all' => 'stories#all', :as => :all_stories
+  match 'settings' => 'setting#edit', :as => :settings
 
   devise_for :users
 

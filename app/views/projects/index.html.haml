@@ -8,17 +8,14 @@
     %table(width="100%" border="0" cellspacing="0" cellpadding="0")
       %tbody
         %tr(class="table-header")
-          %th(width="33%")
-            %h5 Name
-          %th(width="33%")
+          %th(width="50%")
             %h5 Account
-          %th(width="33%")
-            %h5 Action
+          %th(width="50%")
+            %h5 Project Name
 
         - @projects.each do |project|
           %tr
-            %td= project.name
             %td= project.account
-            %td= link_to 'Stories', project_stories_path(project)
+            %td= link_to project.name, project_stories_path(project)
 
 %br

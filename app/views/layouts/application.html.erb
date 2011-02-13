@@ -4,15 +4,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Pivotal Tracker - Time Bridge</title>
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
     <%= stylesheet_link_tag ["reset", "stylesheet", "css3"] %>
     <%= csrf_meta_tag %>
     <!-- internet explorer fixes css -->
     <!--[if lte IE 6]>
       <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css" media="screen" />
     <![endif]-->
-    <%= javascript_include_tag ["jquery-1.4.2.min", "jquery.idTabs.min", "global"] %>
+    <%= javascript_include_tag ["jquery-1.4.2.min", "jquery.idTabs.min", "global", "application"] %>
 </head>
 
 <body>
@@ -24,10 +22,11 @@
     <!-- top menu -->
     <ul id="navigation">
         <li><%= link_to "Dashboard", "#", :class => "coming-soon" %></li>
-        <li><%= link_to "Stories", all_stories_path %></li>
         <li><%= link_to "Projects", projects_path %></li>
+        <li><%= link_to "Stories", all_stories_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "Settings", edit_user_registration_path %></li>
+          <li><%= link_to "Sync", sync_setting_path(current_user) %></li>
+          <li><%= link_to "Settings", edit_setting_path(current_user) %></li>
           <li><%= link_to "Logout", destroy_user_session_path %></li>
         <% end %>
     </ul>

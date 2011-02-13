@@ -14,6 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :first_name
       t.string  :last_name
       t.string  :pivotal_initials
+      t.string  :pivotal_token
       t.integer :default_project_id
       t.string  :default_labels
 

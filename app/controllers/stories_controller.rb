@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_filter :load_project, :except => :all
 
   def all
-    @stories = Story.all
+    @stories = current_user.stories.all
 
     respond_to do |format|
       format.html { render :index }
@@ -32,12 +32,14 @@ class StoriesController < ApplicationController
     @story = @project.stories.find(params[:id])
     stop_all_other_logs
     @story.time_logs.create(:start_time => Time.now, :end_time => nil)
+    flash[:notice] = "Started logging time"
     redirect_to all_stories_path
   end
 
   def stop
     @story = @project.stories.find(params[:id])
     stop_all_other_logs
+    flash[:notice] = "Stopped logging time"
     redirect_to all_stories_path
   end
 

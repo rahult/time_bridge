@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110213062847) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "pivotal_initials"
+    t.string   "pivotal_token"
     t.integer  "default_project_id"
     t.string   "default_labels"
     t.datetime "created_at"
