@@ -2,16 +2,13 @@
 
 %table
   %tr
-    %th Accpeted at
     %th Project
     %th Name
-    %th Description
     %th Story type
     %th Estimate
     %th Current state
     %th Requested by
     %th Owned by
-    %th Labels
     %th User
     %th
     %th
@@ -19,17 +16,14 @@
 
   - @stories.each do |story|
     %tr
-      %td= story.accpeted_at
-      %td= story.project_id
+      %td= story.project
       %td= story.name
-      %td= story.description
       %td= story.story_type
       %td= story.estimate
       %td= story.current_state
       %td= story.requested_by
       %td= story.owned_by
-      %td= story.labels
       %td= story.user_id
-      %td= link_to 'Show', project_story_path(:project_id => @project.id, :id => story.id)
+      %td= link_to 'Show', project_story_path(:project_id => story.project_id, :id => story.id)
 
 %br
