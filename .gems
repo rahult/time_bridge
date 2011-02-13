@@ -1,0 +1,5 @@
+rails -v 3.0.4
+pg
+haml-rails
+pivotal-tracker
+devise
