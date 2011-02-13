@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
                   :first_name, :last_name, :pivotal_initials, :default_project_id,
                   :default_labels, :pivotal_token
 
-  validates_presence_of :first_name, :last_name, :pivotal_initials, :pivotal_token, :on => :update
+  validates_presence_of :first_name, :pivotal_initials, :pivotal_token, :on => :update
 
   # validate :validate_pivotal_token
 
