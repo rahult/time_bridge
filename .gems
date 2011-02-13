@@ -3,3 +3,5 @@ pg
 haml-rails
 pivotal-tracker
 devise
+hpricot
+ruby_parser
