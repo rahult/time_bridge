@@ -8,6 +8,10 @@ gem 'haml-rails'
 
 gem 'pivotal-tracker'
 
+gem 'hpricot'
+
+gem 'ruby_parser'
+
 gem 'devise'
 
 group :test do

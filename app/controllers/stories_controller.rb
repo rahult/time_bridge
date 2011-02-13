@@ -28,8 +28,28 @@ class StoriesController < ApplicationController
     end
   end
 
+  def log
+    @story = @project.stories.find(params[:id])
+    stop_all_other_logs
+    @story.time_logs.create(:start_time => Time.now, :end_time => nil)
+    redirect_to all_stories_path
+  end
+
+  def stop
+    @story = @project.stories.find(params[:id])
+    stop_all_other_logs
+    redirect_to all_stories_path
+  end
+
   protected
     def load_project
       @project = Project.find(params[:project_id])
+    end
+
+    def stop_all_other_logs
+      time_logs = TimeLog.where(:end_time => nil)
+      time_logs.each do |log|
+        log.update_attribute(:end_time, Time.now)
+      end
     end
 end

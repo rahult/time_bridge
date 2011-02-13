@@ -1,19 +1,70 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>TimeBridge</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pivotal Tracker - Time Bridge</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+    <%= stylesheet_link_tag ["reset", "stylesheet", "css3"] %>
+    <%= csrf_meta_tag %>
+    <!-- internet explorer fixes css -->
+    <!--[if lte IE 6]>
+      <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css" media="screen" />
+    <![endif]-->
+    <%= javascript_include_tag ["jquery-1.4.2.min", "jquery.idTabs.min", "global"] %>
 </head>
+
 <body>
 
-  <div class="flash-messages">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+<div id="head">
+  <!-- logo -->
+  <h1 id="logo"><%= link_to "Home Page", root_path %></h1>
+
+    <!-- top menu -->
+    <ul id="navigation">
+        <li><%= link_to "Dashboard", "#", :class => "coming-soon" %></li>
+        <li><%= link_to "Stories", all_stories_path %></li>
+        <li><%= link_to "Projects", projects_path %></li>
+        <li><%= link_to "Settings", projects_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Logout", destroy_user_session_path %></li>
+        <% end %>
+    </ul>
+</div>
+
+<!-- start: side column -->
+<div id="side">
+<% if user_signed_in? %>
+  <div id="welcome-block">
+    <span>Welcome <%= link_to current_user.to_s, "#" %></span>
+  </div>
+<% end %>
+<!-- end: side column -->
+</div>
+
+<!-- start: content -->
+<div id="content">
+  <!-- page corner -->
+  <div class="corner"></div>
+
+  <% unless notice.blank? %>
+    <div class="success canhide"><%= notice %></div>
+  <% end %>
+  <% unless alert.blank? %>
+    <div class="warning canhide"><%= alert %></div>
+  <% end %>
+
+  <div class="kubrick">
+    <%= yield %>
   </div>
 
-  <%= yield %>
+  <div id="footer">
+    <span>Rahul Trikha &copy; 2011 <a href="#head">top</a></span>
+  </div>
+
+<!-- end: content -->
+</div>
 
 </body>
 </html>

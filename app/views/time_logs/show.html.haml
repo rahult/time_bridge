@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Story:
+  = @time_log.story_id
+%p
+  %b Start time:
+  = @time_log.start_time
+%p
+  %b End time:
+  = @time_log.end_time
+%p
+  %b Notes:
+  = @time_log.notes
+
+= link_to 'Edit', edit_time_log_path(@time_log)
+\|
+= link_to 'Back', time_logs_path

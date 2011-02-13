@@ -1,0 +1,22 @@
+= form_for @time_log do |f|
+  -if @time_log.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@time_log.errors.count, "error")} prohibited this time_log from being saved:"
+      %ul
+        - @time_log.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :story_id
+    = f.text_field :story_id
+  .field
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .field
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .field
+    = f.label :notes
+    = f.text_area :notes
+  .actions
+    = f.submit 'Save'

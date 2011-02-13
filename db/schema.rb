@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110213011650) do
+ActiveRecord::Schema.define(:version => 20110213062847) do
 
   create_table "projects", :force => true do |t|
     t.integer  "pivotal_id"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(:version => 20110213011650) do
     t.string   "owned_by"
     t.text     "labels"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_logs", :force => true do |t|
+    t.integer  "story_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

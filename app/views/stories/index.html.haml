@@ -1,29 +1,45 @@
-%h1 Listing stories
+- @stories.group_by(&:project).each do |project, stories|
+  %div(class="top")
+    %h3= project
 
-%table
-  %tr
-    %th Project
-    %th Name
-    %th Story type
-    %th Estimate
-    %th Current state
-    %th Requested by
-    %th Owned by
-    %th User
-    %th
-    %th
-    %th
+  %div(class="wrap")
+    %div(id="tables")
 
-  - @stories.each do |story|
-    %tr
-      %td= story.project
-      %td= story.name
-      %td= story.story_type
-      %td= story.estimate
-      %td= story.current_state
-      %td= story.requested_by
-      %td= story.owned_by
-      %td= story.user_id
-      %td= link_to 'Show', project_story_path(:project_id => story.project_id, :id => story.id)
+      %table(width="100%" border="0" cellspacing="0" cellpadding="0")
+        %tbody
+          %tr(class="table-header")
+            %th(width="20%")
+              %h5 Name
+            %th(width="10%")
+              %h5 Story type
+            %th(width="10%")
+              %h5 Estimate
+            %th(width="10%")
+              %h5 Current state
+            %th(width="10%")
+              %h5 Requested by
+            %th(width="15%")
+              %h5 Owned by
+            %th(width="15%")
+              %h5 User
+            %th(width="10%")
+              %h5 Actions
+
+          - stories.each do |story|
+            %tr
+              %td= story.name
+              %td= story.story_type
+              %td= story.estimate
+              %td= story.current_state
+              %td= story.requested_by
+              %td= story.owned_by
+              %td= story.user_id
+              %td= link_to('Start', log_project_story_path(:project_id => story.project_id, :id => story.id))
+            - story.time_logs.each do |log|
+              %tr
+                %td(colspan="2")= log.start_time.to_s(:pretty)
+                %td(colspan="2")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
+                %td(colspan="2")= log.notes
+                %td(colspan="3")= log.end_time.blank? ? link_to("Stop", stop_project_story_path(:project_id => story.project_id, :id => story.id)) : "Completed"
 
 %br

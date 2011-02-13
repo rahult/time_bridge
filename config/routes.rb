@@ -1,6 +1,11 @@
 TimeBridge::Application.routes.draw do
+  resources :time_logs
+
   resources :projects do
-    resources :stories
+    resources :stories do
+      get 'log',  :on => :member
+      get 'stop', :on => :member
+    end
   end
 
   match 'all' => 'stories#all', :as => :all_stories
