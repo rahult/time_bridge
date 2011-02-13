@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def is_not_integrated?
-    first_name.blank? || last_name.blank? || pivotal_initials.blank? || pivotal_token.blank?
+    first_name.blank? || pivotal_initials.blank? || pivotal_token.blank?
   end
 
 end
