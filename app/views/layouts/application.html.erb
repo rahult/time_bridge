@@ -26,8 +26,8 @@
         <li><%= link_to "Dashboard", "#", :class => "coming-soon" %></li>
         <li><%= link_to "Stories", all_stories_path %></li>
         <li><%= link_to "Projects", projects_path %></li>
-        <li><%= link_to "Settings", projects_path %></li>
         <% if user_signed_in? %>
+          <li><%= link_to "Settings", edit_user_registration_path %></li>
           <li><%= link_to "Logout", destroy_user_session_path %></li>
         <% end %>
     </ul>
@@ -37,7 +37,7 @@
 <div id="side">
 <% if user_signed_in? %>
   <div id="welcome-block">
-    <span>Welcome <%= link_to current_user.to_s, "#" %></span>
+    <span>Welcome <%= link_to current_user.to_s, edit_user_registration_path %></span>
   </div>
 <% end %>
 <!-- end: side column -->

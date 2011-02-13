@@ -1,9 +1,12 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Send me reset password instructions"
-= render :partial => "devise/shared/links"
+%div(class="top")
+  %h3 Forgot your password?
+
+%div(class="wrap")
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+    %p
+      = f.label :email
+      %br/
+      = f.text_field :email, :class => "text medium"
+    %p= f.submit "Reset password", :class => "button def"
+  = render :partial => "devise/shared/links"

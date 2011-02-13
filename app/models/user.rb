@@ -9,7 +9,11 @@ class User < ActiveRecord::Base
                   :first_name, :last_name, :pivotal_initials, :default_project_id,
                   :default_labels
 
+  def full_name
+    first_name + " " + last_name
+  end
+
   def to_s
-    email
+    full_name || email
   end
 end

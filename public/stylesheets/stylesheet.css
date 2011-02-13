@@ -209,7 +209,7 @@ table {
 	}
 
 /* System messages */
-.notice, .info, .warning, .success {
+#error_explanation, .notice, .info, .warning, .success {
 	padding: 11px 15px 8px;
 	margin: 10px 0;
 	color: #1d1d1d;
@@ -227,7 +227,7 @@ table {
 		background: #b5d1ff;
 		border: 1px solid #a4c1ee;
 	}
-	.warning {
+	#error_explanation, .warning {
 		background: #ffb5b5;
 		border: 1px solid #e09799;
 	}
