@@ -1,0 +1,17 @@
+%h1 Listing projects
+
+%table
+  %tr
+    %th Name
+    %th Account
+    %th
+    %th
+    %th
+
+  - @projects.each do |project|
+    %tr
+      %td= project.name
+      %td= project.account
+      %td= link_to 'Stories', project_stories_path(project)
+
+%br

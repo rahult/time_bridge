@@ -1,0 +1,37 @@
+%p#notice= notice
+
+%p
+  %b Accpeted at:
+  = @story.accpeted_at
+%p
+  %b Project:
+  = @story.project_id
+%p
+  %b Name:
+  = @story.name
+%p
+  %b Description:
+  = @story.description
+%p
+  %b Story type:
+  = @story.story_type
+%p
+  %b Estimate:
+  = @story.estimate
+%p
+  %b Current state:
+  = @story.current_state
+%p
+  %b Requested by:
+  = @story.requested_by
+%p
+  %b Owned by:
+  = @story.owned_by
+%p
+  %b Labels:
+  = @story.labels
+%p
+  %b User:
+  = @story.user_id
+
+= link_to 'Back', project_stories_path(@project)
