@@ -30,8 +30,8 @@
           - stories.each do |story|
             %tr
               %td= story.name
-              %td= story.job_no
               %td= story.client_no
+              %td= story.job_no
               %td= story.story_type.capitalize
               %td= story.estimate
               %td= story.current_state.capitalize

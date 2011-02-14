@@ -33,14 +33,14 @@ class StoriesController < ApplicationController
     stop_all_other_logs
     @story.time_logs.create(:start_time => Time.now, :end_time => nil)
     flash[:notice] = "Started logging time"
-    redirect_to all_stories_path
+    redirect_to :back
   end
 
   def stop
     @story = @project.stories.find(params[:id])
     stop_all_other_logs
     flash[:notice] = "Stopped logging time"
-    redirect_to all_stories_path
+    redirect_to :back
   end
 
   protected
