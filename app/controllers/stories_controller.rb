@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_filter :load_project, :except => :all
 
   def all
-    @stories = current_user.stories.all
+    @stories = current_user.stories.active
 
     respond_to do |format|
       format.html { render :index }
@@ -11,7 +11,7 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = @project.stories.all
+    @stories = @project.stories.active
 
     respond_to do |format|
       format.html

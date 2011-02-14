@@ -34,9 +34,9 @@
               %td= link_to(image_tag("start.png"), log_project_story_path(:project_id => story.project_id, :id => story.id))
             - story.time_logs.each do |log|
               %tr
-                %td(colspan="2")= log.start_time.to_s(:pretty)
-                %td(colspan="2")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
-                %td(colspan="2")= log.notes
-                %td(colspan="3")= log.end_time.blank? ? link_to(image_tag("stop.png"), stop_project_story_path(:project_id => story.project_id, :id => story.id)) : image_tag("tick.png")
+                %td(width="20%"){:class => (log.end_time.blank? ? "negative" : "positive")}= log.start_time.to_s(:pretty)
+                %td(width="20%")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
+                %td(width="50%" colspan="4")= log.notes
+                %td(width="10%" class="controls")= log.end_time.blank? ? link_to(image_tag("stop.png"), stop_project_story_path(:project_id => story.project_id, :id => story.id)) : ""
 
 %br
