@@ -26,4 +26,12 @@
       = f.label :pivotal_initials
       %br/
       = f.text_field :pivotal_initials, :class => "text medium"
+    %p
+      = f.label :default_project_id
+      %br/
+      = f.select :default_project_id, Project.all.collect { |p| [p.name, p.id] }, :class => "text medium", :include_blank => true
+    %p
+      = f.label :default_labels
+      %br/
+      = f.text_field :default_labels, :class => "text medium"
     %p= f.submit "Update", :class => "button def"

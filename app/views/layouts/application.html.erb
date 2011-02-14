@@ -21,7 +21,7 @@
 
     <!-- top menu -->
     <ul id="navigation">
-        <li><%= link_to "Dashboard", "#", :class => "coming-soon" %></li>
+        <li><%= link_to "Dashboard", dashboard_path %></li>
         <li><%= link_to "Projects", projects_path %></li>
         <li><%= link_to "Stories", all_stories_path %></li>
         <% if user_signed_in? %>

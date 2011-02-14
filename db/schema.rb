@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214052042) do
+ActiveRecord::Schema.define(:version => 20110213062847) do
 
   create_table "projects", :force => true do |t|
     t.integer  "pivotal_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20110214052042) do
     t.string   "requested_by"
     t.string   "owned_by"
     t.text     "labels"
+    t.string   "client_no"
+    t.string   "job_no"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -70,9 +72,9 @@ ActiveRecord::Schema.define(:version => 20110214052042) do
     t.string   "pivotal_token"
     t.integer  "default_project_id"
     t.string   "default_labels"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

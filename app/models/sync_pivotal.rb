@@ -31,6 +31,10 @@ class SyncPivotal
 
       attributes[:user_id] = @user.id if story.owned_by.eql?(@user.full_name)
 
+      unless story.labels.blank?
+        attributes[:client_no], attributes[:job_no] = *(story.labels.split("-").map { |l| l.strip })
+      end
+
       if s = Story.find_by_pivotal_id(story.id)
         s.update_attributes(attributes)
       else

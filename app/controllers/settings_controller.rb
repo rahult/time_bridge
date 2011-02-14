@@ -18,7 +18,7 @@ class SettingsController < ApplicationController
       flash[:notice] = "Your account has been synced with Pivotal Tracker"
       redirect_to root_path
     rescue Exception => e
-      flash[:notice] = "Pivotal Tracker token '#{User.find(current_user).pivotal_token}' you provided is incorrect"
+      flash[:notice] = "Something went wrong while importing data from Pivotal Tracker using this token '#{User.find(current_user).pivotal_token}'"
       redirect_to edit_setting_path(current_user)
     end
   end

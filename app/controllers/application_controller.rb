@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
-  before_filter :sync_with_pivotal_tracker
+  before_filter :check_user_profile_for_completeness
 
   protected
-    def sync_with_pivotal_tracker
+    def check_user_profile_for_completeness
       unless params[:controller].eql?("settings")
         if user_signed_in?
           if current_user.is_not_integrated?

@@ -11,6 +11,10 @@
             %th(width="30%")
               %h5 Name
             %th(width="10%")
+              %h5 Client
+            %th(width="10%")
+              %h5 Job
+            %th(width="10%")
               %h5 Type
             %th(width="10%")
               %h5 Estimate
@@ -26,6 +30,8 @@
           - stories.each do |story|
             %tr
               %td= story.name
+              %td= story.job_no
+              %td= story.client_no
               %td= story.story_type.capitalize
               %td= story.estimate
               %td= story.current_state.capitalize
@@ -36,7 +42,7 @@
               %tr
                 %td(width="20%"){:class => (log.end_time.blank? ? "negative" : "positive")}= log.start_time.to_s(:pretty)
                 %td(width="20%")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
-                %td(width="50%" colspan="4")= log.notes
+                %td(width="50%" colspan="6")= log.notes
                 %td(width="10%" class="controls")= log.end_time.blank? ? link_to(image_tag("stop.png"), stop_project_story_path(:project_id => story.project_id, :id => story.id)) : ""
 
 %br

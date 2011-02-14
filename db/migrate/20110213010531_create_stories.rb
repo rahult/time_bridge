@@ -12,6 +12,8 @@ class CreateStories < ActiveRecord::Migration
       t.string   :requested_by
       t.string   :owned_by
       t.text     :labels
+      t.string   :client_no
+      t.string   :job_no
       t.integer  :user_id
 
       t.timestamps

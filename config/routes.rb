@@ -1,4 +1,6 @@
 TimeBridge::Application.routes.draw do
+  resource :dashboard
+
   resources :settings do
     get 'sync', :on => :member
   end
@@ -15,5 +17,5 @@ TimeBridge::Application.routes.draw do
 
   devise_for :users
 
-  root :to => 'stories#all'
+  root :to => 'dashboards#show'
 end

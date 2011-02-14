@@ -14,6 +14,8 @@ gem 'ruby_parser'
 
 gem 'devise'
 
+gem 'ruby-debug19', :group => :development
+
 group :test do
   gem "shoulda"
   gem "factory_girl"
