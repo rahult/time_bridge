@@ -27,8 +27,9 @@ class SyncPivotal
                      :description => story.description, :story_type => story.story_type,
                      :estimate => story.estimate, :current_state => story.current_state,
                      :requested_by => story.requested_by, :owned_by => story.owned_by,
-                     :labels => story.labels, :accpeted_at => story.accepted_at, 
-                     :user_id => (story.owned_by.eql?(@user.full_name) ? @user.id : nil) }
+                     :labels => story.labels, :accpeted_at => story.accepted_at }
+
+      attributes[:user_id] = @user.id if story.owned_by.eql?(@user.full_name)
 
       if s = Story.find_by_pivotal_id(story.id)
         s.update_attributes(attributes)

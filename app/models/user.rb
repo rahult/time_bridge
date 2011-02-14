@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable,
-         :registerable, :trackable, :validatable, :lockable
+         :registerable, :trackable, :validatable, :lockable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   def is_not_integrated?
     first_name.blank? || pivotal_initials.blank? || pivotal_token.blank?
+  end
+
+  def is_admin?
+    role.eql?("Admin") ? true : false
   end
 
 end

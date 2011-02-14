@@ -38,6 +38,20 @@
   <div id="welcome-block">
     <span>Welcome <%= link_to current_user.to_s, edit_user_registration_path %></span>
   </div>
+
+  <% if current_user.is_admin? %>
+    <!-- sub menus -->
+    <div id="sub-menu">
+      <h3><a href="#">Administration</a></h3>
+      <ul>
+        <li><%= link_to "Manage Users", "#" %></li>
+      </ul>
+      <h3><a href="#">Export Time Logs</a></h3>
+      <ul>
+        <li><%= link_to "Export all as CSV", "#" %></li>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
 <!-- end: side column -->
 </div>
