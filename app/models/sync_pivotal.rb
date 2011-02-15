@@ -15,13 +15,13 @@ class SyncPivotal
       else
         p = Project.create(attributes)
       end
-      sync_project_stories(project.id, p.id)
+      sync_project_stories(project, p.id)
     end
     return nil
   end
 
-  def sync_project_stories(pivotal_id, project_id)
-    stories = PivotalTracker::Project.find(pivotal_id).stories.all
+  def sync_project_stories(pivotal_project, project_id)
+    stories = pivotal_project.stories.all
     stories.each do |story|
       attributes = { :pivotal_id => story.id, :project_id => project_id, :name => story.name,
                      :description => story.description, :story_type => story.story_type,
@@ -41,7 +41,6 @@ class SyncPivotal
         Story.create(attributes)
       end
     end
-    return nil
   end
 
 end

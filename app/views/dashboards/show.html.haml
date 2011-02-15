@@ -1,0 +1,44 @@
+- unless @stories
+  %div(class="wrap")
+    %p(class="bigger") To enable this section please set your default project within settings tab.
+
+- else
+  - @stories.group_by(&:client_no).each do |client_no, stories|
+    %div(class="top")
+      %h3= client_no.upcase
+
+    %div(class="wrap")
+      %div(id="tables")
+
+        %table(width="100%" border="0" cellspacing="0" cellpadding="0")
+          %tbody
+            %tr(class="table-header")
+              %th(width="40%")
+                %h5 Name
+              %th(width="10%")
+                %h5 Type
+              %th(width="10%")
+                %h5 Estimate
+              %th(width="10%")
+                %h5 State
+              %th(width="20%")
+                %h5 Requested by
+              %th(width="10%")
+                %h5 Actions
+
+            - stories.each do |story|
+              %tr
+                %td= story.name
+                %td= story.story_type.capitalize
+                %td= story.estimate
+                %td= story.current_state.capitalize
+                %td= story.requested_by.blank? ? "" : story.requested_by
+                %td= link_to(image_tag("start.png"), log_project_story_path(:project_id => story.project_id, :id => story.id))
+              - story.time_logs.each do |log|
+                %tr
+                  %td(width="25%"){:class => (log.end_time.blank? ? "negative" : "positive")}= log.start_time.to_s(:pretty)
+                  %td(width="25%")= log.end_time.blank? ? "" : log.end_time.to_s(:pretty)
+                  %td(width="40%" colspan="3")= log.notes
+                  %td(width="10%" class="controls")= log.end_time.blank? ? link_to(image_tag("stop.png"), stop_project_story_path(:project_id => story.project_id, :id => story.id)) : ""
+
+  %br
