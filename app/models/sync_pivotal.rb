@@ -15,33 +15,41 @@ class SyncPivotal
       else
         p = Project.create(attributes)
       end
-      sync_project_stories(project.id, p.id)
+      # sync_project_stories(project.id, p.id)
     end
     return nil
   end
 
   def sync_project_stories(pivotal_id, project_id)
     stories = PivotalTracker::Project.find(pivotal_id).stories.all
+
+    threads = []
+
     stories.each do |story|
-      attributes = { :pivotal_id => story.id, :project_id => project_id, :name => story.name,
-                     :description => story.description, :story_type => story.story_type,
-                     :estimate => story.estimate, :current_state => story.current_state,
-                     :requested_by => story.requested_by, :owned_by => story.owned_by,
-                     :labels => story.labels, :accpeted_at => story.accepted_at }
 
-      attributes[:user_id] = @user.id if story.owned_by.eql?(@user.full_name)
+      threads << Thread.new(page) do |thread_story| 
 
-      unless story.labels.blank?
-        attributes[:client_no], attributes[:job_no] = *(story.labels.split("-").map { |l| l.strip })
+        attributes = { :pivotal_id => thread_story.id, :project_id => project_id, :name => thread_story.name,
+                       :description => thread_story.description, :thread_story.type => thread_story.thread_story.type,
+                       :estimate => thread_story.estimate, :current_state => thread_story.current_state,
+                       :requested_by => thread_story.requested_by, :owned_by => thread_story.owned_by,
+                       :labels => thread_story.labels, :accpeted_at => thread_story.accepted_at }
+
+        attributes[:user_id] = @user.id if thread_story.owned_by.eql?(@user.full_name)
+
+        unless thread_story.labels.blank?
+          attributes[:client_no], attributes[:job_no] = *(thread_story.labels.split("-").map { |l| l.strip })
+        end
+
+        if s = Story.find_by_pivotal_id(thread_story.id)
+          s.update_attributes(attributes)
+        else
+          Story.create(attributes)
+        end
       end
 
-      if s = Story.find_by_pivotal_id(story.id)
-        s.update_attributes(attributes)
-      else
-        Story.create(attributes)
-      end
+      threads.each { |thread| thread.join }
     end
-    return nil
   end
 
 end
