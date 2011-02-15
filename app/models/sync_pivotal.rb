@@ -2,11 +2,12 @@ class SyncPivotal
 
   def initialize(user)
     @user = user
-    PivotalTracker::Client.token = @user.pivotal_token
+    PivotalTracker::Client.token ||= @user.pivotal_token
   end
 
   def sync_projects
     projects = PivotalTracker::Project.all
+
     projects.each do |project|
       attributes = { :pivotal_id => project.id, :name => project.name, :account => project.account }
       p = Project.find_by_pivotal_id(project.id)
@@ -15,9 +16,8 @@ class SyncPivotal
       else
         p = Project.create(attributes)
       end
-      # sync_project_stories(project.id, p.id)
+      sync_project_stories(project.id, p.id)
     end
-    return nil
   end
 
   def sync_project_stories(pivotal_id, project_id)
@@ -27,7 +27,7 @@ class SyncPivotal
 
     stories.each do |story|
 
-      threads << Thread.new(page) do |thread_story| 
+      threads << Thread.new(page) do |thread_story|
 
         attributes = { :pivotal_id => thread_story.id, :project_id => project_id, :name => thread_story.name,
                        :description => thread_story.description, :thread_story.type => thread_story.thread_story.type,
