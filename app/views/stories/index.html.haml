@@ -8,12 +8,10 @@
       %table(width="100%" border="0" cellspacing="0" cellpadding="0")
         %tbody
           %tr(class="table-header")
-            %th(width="20%")
+            %th(width="30%")
               %h5 Name
             %th(width="10%")
               %h5 Client
-            %th(width="20%")
-              %h5 Job
             %th(width="10%")
               %h5 Type
             %th(width="10%")
@@ -28,8 +26,7 @@
           - stories.each do |story|
             %tr
               %td= story.name
-              %td= story.client_no
-              %td= story.job_no
+              %td= story.client_no.capitalize unless story.client_no.blank?
               %td= story.story_type.capitalize
               %td= story.estimate
               %td= story.current_state.capitalize
